@@ -10,7 +10,7 @@ module.exports = {
     browser: true,
     jest: true,
   },
-  extends: ['airbnb-typescript', 'prettier', 'prettier/react'],
+  extends: ['airbnb-typescript', 'react-app', 'prettier', 'prettier/react'],
   plugins: ['prettier'],
   rules: {
     'prettier/prettier': ['error', prettierOptions],
