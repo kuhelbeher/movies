@@ -13,6 +13,7 @@ module.exports = {
   extends: ['airbnb-typescript', 'react-app', 'prettier', 'prettier/react'],
   plugins: ['prettier'],
   rules: {
+    '@typescript-eslint/semi': 0,
     'prettier/prettier': ['error', prettierOptions],
   },
 };
