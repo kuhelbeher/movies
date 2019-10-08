@@ -14,6 +14,8 @@ module.exports = {
   plugins: ['prettier'],
   rules: {
     '@typescript-eslint/semi': 0,
+    'import/prefer-default-export': 0,
+    'react/jsx-props-no-spreading': 0,
     'prettier/prettier': ['error', prettierOptions],
   },
 };

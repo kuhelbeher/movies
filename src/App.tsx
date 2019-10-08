@@ -1,8 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Login from './auth/containers/Login';
-import Register from './auth/containers/Register';
+import Login from './containers/Auth/Login';
+import Register from './containers/Auth/Register';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
@@ -13,9 +14,9 @@ function App() {
       <Route path="/register">
         <Register />
       </Route>
-      <Route exact path="/">
+      <PrivateRoute exact isAuthenticated={false} path="/">
         main route
-      </Route>
+      </PrivateRoute>
     </Switch>
   );
 }
