@@ -1,5 +1,6 @@
 import React from 'react';
 import { TextField, Button, makeStyles } from '@material-ui/core';
+import { Form, Field } from 'react-final-form';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -14,54 +15,83 @@ const useStyles = makeStyles(theme => ({
 function RegisterForm() {
   const classes = useStyles();
 
+  const onSubmit = (values: {
+    name: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+  }) => {
+    console.log(values);
+  };
+
   return (
-    <form className={classes.form} noValidate>
-      <TextField
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        label="Name"
-        name="name"
-        autoComplete="name"
-        autoFocus
-      />
-      <TextField
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        label="Email Address"
-        name="email"
-        autoComplete="email"
-      />
-      <TextField
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        name="password"
-        label="Password"
-        type="password"
-      />
-      <TextField
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        name="confirmPassword"
-        label="Confirm Password"
-        type="password"
-      />
-      <Button
-        type="submit"
-        fullWidth
-        variant="contained"
-        color="primary"
-        className={classes.submit}>
-        Sign Up
-      </Button>
-    </form>
+    <Form onSubmit={onSubmit}>
+      {({ handleSubmit }) => (
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
+          <Field name="name">
+            {({ input }) => (
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                label="Name"
+                autoComplete="name"
+                autoFocus
+                {...input}
+              />
+            )}
+          </Field>
+          <Field name="email">
+            {({ input }) => (
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                label="Email Address"
+                autoComplete="email"
+                {...input}
+              />
+            )}
+          </Field>
+          <Field name="password">
+            {({ input }) => (
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                label="Password"
+                type="password"
+                {...input}
+              />
+            )}
+          </Field>
+          <Field name="confirmPassword">
+            {({ input }) => (
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                label="Confirm Password"
+                type="password"
+                {...input}
+              />
+            )}
+          </Field>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}>
+            Sign Up
+          </Button>
+        </form>
+      )}
+    </Form>
   );
 }
 
