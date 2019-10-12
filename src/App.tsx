@@ -10,7 +10,7 @@ function App() {
       <Route path="/auth">
         <Auth />
       </Route>
-      <PrivateRoute exact isAuthenticated={false} path="/">
+      <PrivateRoute exact isAllowed={false} path="/">
         main route
       </PrivateRoute>
       <Redirect to="/" />

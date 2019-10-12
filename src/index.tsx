@@ -2,15 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/styles';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { theme } from './theme';
 
 const app = (
   <>
     <CssBaseline />
     <Router>
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </Router>
   </>
 );

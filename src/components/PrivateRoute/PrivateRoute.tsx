@@ -2,16 +2,16 @@ import React from 'react';
 import { Route, Redirect, useLocation } from 'react-router-dom';
 
 type Props = {
-  isAuthenticated: boolean;
+  isAllowed: boolean;
   exact?: boolean;
   path: string;
   children: React.ReactType | string;
 };
 
-const PrivateRoute = ({ children, isAuthenticated, ...rest }: Props) => {
+const PrivateRoute = ({ children, isAllowed, ...rest }: Props) => {
   const location = useLocation();
 
-  if (!isAuthenticated) {
+  if (!isAllowed) {
     return (
       <Redirect
         to={{
