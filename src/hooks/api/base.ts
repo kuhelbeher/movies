@@ -8,6 +8,7 @@ import {
 import { AxiosRequestConfig } from 'axios';
 
 import axios from '../../utils/api';
+import { Errors } from '../../types';
 
 // This hook is based on this - https://mariusschulz.com/blog/the-object-type-in-typescript
 
@@ -19,7 +20,7 @@ enum Types {
 
 export type State = {
   loading: boolean;
-  errors: object | null;
+  errors: Errors | null;
   data: any;
 };
 

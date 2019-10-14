@@ -1,8 +1,9 @@
 import React from 'react';
-import { TextField, Button, makeStyles } from '@material-ui/core';
-import { Form, Field } from 'react-final-form';
+import { Button, makeStyles } from '@material-ui/core';
+import { Form } from 'react-final-form';
 
 import { useAuth } from '../../../hooks/api';
+import FormTextField from '../../../components/Form/FormTextField';
 
 const useStyles = makeStyles(theme => ({
   form: {
@@ -25,41 +26,35 @@ function LoginForm() {
 
   return (
     <Form onSubmit={onSubmit}>
-      {({ handleSubmit, pristine }) => (
+      {({ handleSubmit }) => (
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <fieldset disabled={loading} aria-busy={loading}>
-            <Field name="email">
-              {({ input }) => (
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  label="Email Address"
-                  autoComplete="email"
-                  autoFocus
-                  {...input}
-                />
-              )}
-            </Field>
-            <Field name="password" type="password">
-              {({ input }) => (
-                <TextField
-                  variant="outlined"
-                  margin="normal"
-                  required
-                  fullWidth
-                  label="Password"
-                  {...input}
-                />
-              )}
-            </Field>
+            <FormTextField
+              name="email"
+              errors={errors}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              label="Email Address"
+              autoComplete="email"
+              autoFocus
+            />
+            <FormTextField
+              name="password"
+              type="password"
+              errors={errors}
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              label="Password"
+            />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
-              disabled={pristine}
               className={classes.submit}>
               Sign In
             </Button>

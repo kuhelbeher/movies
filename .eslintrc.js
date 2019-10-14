@@ -10,7 +10,13 @@ module.exports = {
     browser: true,
     jest: true,
   },
-  extends: ['airbnb-typescript', 'react-app', 'prettier', 'prettier/react'],
+  extends: [
+    'airbnb-typescript',
+    'react-app',
+    'plugin:import/typescript',
+    'prettier',
+    'prettier/react',
+  ],
   plugins: ['prettier'],
   rules: {
     '@typescript-eslint/semi': 0,
