@@ -7,7 +7,9 @@ import {
 } from 'react';
 import { AxiosRequestConfig } from 'axios';
 
-import axios from '../utils/api';
+import axios from '../../utils/api';
+
+// This hook is based on this - https://mariusschulz.com/blog/the-object-type-in-typescript
 
 enum Types {
   RequestStart = 'REQUEST_START',
@@ -15,7 +17,7 @@ enum Types {
   RequestFail = 'REQUEST_FAIL',
 }
 
-type State = {
+export type State = {
   loading: boolean;
   errors: object | null;
   data: any;
@@ -71,13 +73,13 @@ export const useRequest = (
     let didCancel = false;
 
     const request = async () => {
+      if (!config) {
+        return;
+      }
+
       dispatch({ type: Types.RequestStart });
 
       try {
-        if (!config) {
-          return;
-        }
-
         const res = await axios.request(config);
 
         if (!didCancel) {
