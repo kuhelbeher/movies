@@ -2,6 +2,8 @@ import React from 'react';
 import { TextField, Button, makeStyles } from '@material-ui/core';
 import { Form, Field } from 'react-final-form';
 
+import { useRequest } from '../../../hooks';
+
 const useStyles = makeStyles(theme => ({
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -15,13 +17,21 @@ const useStyles = makeStyles(theme => ({
 function LoginForm() {
   const classes = useStyles();
 
+  const [{ data, loading, errors }, doRequest] = useRequest();
+
+  console.log({ data, loading, errors });
+
   const onSubmit = (values: { email: string; password: string }) => {
-    console.log(values);
+    doRequest({
+      url: '/login',
+      method: 'POST',
+      data: values,
+    });
   };
 
   return (
     <Form onSubmit={onSubmit}>
-      {({ handleSubmit }) => (
+      {({ handleSubmit, submitting, pristine, invalid }) => (
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Field name="email">
             {({ input }) => (
@@ -55,6 +65,7 @@ function LoginForm() {
             fullWidth
             variant="contained"
             color="primary"
+            disabled={submitting || pristine}
             className={classes.submit}>
             Sign In
           </Button>

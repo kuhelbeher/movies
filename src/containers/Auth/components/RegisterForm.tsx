@@ -26,7 +26,7 @@ function RegisterForm() {
 
   return (
     <Form onSubmit={onSubmit}>
-      {({ handleSubmit }) => (
+      {({ handleSubmit, submitting, pristine }) => (
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Field name="name">
             {({ input }) => (
@@ -86,6 +86,7 @@ function RegisterForm() {
             fullWidth
             variant="contained"
             color="primary"
+            disabled={submitting || pristine}
             className={classes.submit}>
             Sign Up
           </Button>
