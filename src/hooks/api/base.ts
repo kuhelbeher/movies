@@ -57,10 +57,10 @@ const requestReducer = (
 };
 
 export const useRequest = (
-  initialConfig?: AxiosRequestConfig,
+  initialConfig?: AxiosRequestConfig | null,
   initialData?: any,
-): [State, Dispatch<SetStateAction<AxiosRequestConfig | undefined>>] => {
-  const [config, setConfig] = useState<AxiosRequestConfig | undefined>(
+): [State, Dispatch<SetStateAction<AxiosRequestConfig | undefined | null>>] => {
+  const [config, setConfig] = useState<AxiosRequestConfig | undefined | null>(
     initialConfig,
   );
 
@@ -84,7 +84,7 @@ export const useRequest = (
         const res = await axios.request(config);
 
         if (!didCancel) {
-          dispatch({ type: Types.RequestSuccess, payload: res.data });
+          dispatch({ type: Types.RequestSuccess, payload: res.data.data });
         }
       } catch (e) {
         if (!didCancel) {

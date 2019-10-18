@@ -1,25 +1,56 @@
+import { useCallback, useEffect } from 'react';
+
 import { useRequest, State } from './base';
+import { storageSave, setAuthToken } from '../../utils';
+import { Token } from '../../types';
 
 type AuthPayload = {
   email: string;
   password: string;
+  passwordConfirmation?: string;
   name?: string;
+};
+
+type AuthState = State & {
+  data?: {
+    token: Token;
+  };
+};
+
+const initialData = {
+  token: {
+    tokenType: '',
+    accessToken: '',
+    expiresAt: '',
+  },
 };
 
 export const useAuth = (
   isLogin: boolean,
-): [State, (data: AuthPayload) => void] => {
-  const [state, doRequest] = useRequest();
+): [AuthState, (data: AuthPayload) => void] => {
+  const [state, doRequest]: [AuthState, Function] = useRequest(
+    null,
+    initialData,
+  );
 
-  const authRequest = (data: AuthPayload) => {
-    const url = isLogin ? '/login' : '/register';
+  useEffect(() => {
+    storageSave('token', state.data.token);
 
-    doRequest({
-      url,
-      method: 'POST',
-      data,
-    });
-  };
+    setAuthToken(state.data.token);
+  }, [state.data.token]);
+
+  const authRequest = useCallback(
+    (data: AuthPayload) => {
+      const url = isLogin ? '/login' : '/register';
+
+      doRequest({
+        url,
+        method: 'POST',
+        data,
+      });
+    },
+    [doRequest, isLogin],
+  );
 
   return [state, authRequest];
 };
