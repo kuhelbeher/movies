@@ -20,14 +20,11 @@ function RegisterForm() {
 
   const [{ data, loading, errors }, doRequest] = useAuth(false);
 
-  const onSubmit = ({
-    confirmPassword, // omitting confirmPassword field
-    ...values
-  }: {
+  const onSubmit = (values: {
     name: string;
     email: string;
     password: string;
-    confirmPassword: string;
+    passwordConfirmation: string;
   }) => {
     doRequest(values);
   };
@@ -69,7 +66,7 @@ function RegisterForm() {
               label="Password"
             />
             <FormTextField
-              name="confirmPassword"
+              name="passwordConfirmation"
               type="password"
               errors={errors}
               variant="outlined"

@@ -33,13 +33,13 @@ const requestReducer = (
       return {
         ...state,
         loading: true,
-        errors: null,
       };
     }
     case Types.RequestSuccess: {
       return {
         ...state,
         loading: false,
+        errors: null,
         data: action.payload,
       };
     }
@@ -88,7 +88,7 @@ export const useRequest = (
         }
       } catch (e) {
         if (!didCancel) {
-          dispatch({ type: Types.RequestFail, payload: e.response.data });
+          dispatch({ type: Types.RequestFail, payload: e.response.data.data });
         }
       }
     };
