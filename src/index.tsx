@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
@@ -7,15 +8,18 @@ import { ThemeProvider } from '@material-ui/styles';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { theme } from './theme';
+import store from './store';
 
 const app = (
   <>
     <CssBaseline />
-    <Router>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </Router>
+    </Provider>
   </>
 );
 
